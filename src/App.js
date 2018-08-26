@@ -23,8 +23,6 @@ class App extends React.Component {
   } 
   
 render() {
-
-
     return (
       <Router>
       <div>
@@ -47,6 +45,7 @@ render() {
               <LoggedForm history={history} />
               <CreateBlogForm history={history} />
               <UsersForm history={history} />
+              <UserForm id = '5b71a62ad9b41c0310002cbe' />
           </div>
           )
         } } />
@@ -54,7 +53,7 @@ render() {
           return (
             <div>
               <LoggedForm history={history} />
-              <UserForm id = { match.params.id } />
+              <UserForm id = { match.params.id } xxx = {this.props.users}/>
             </div>
           ) 
         } } />
@@ -64,7 +63,13 @@ render() {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    users: state.users
+  }
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   { blogInitialization, userInitialization, userCheck }
 )(App)
