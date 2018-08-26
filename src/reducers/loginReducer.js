@@ -1,6 +1,5 @@
 import blogService from '../services/blogs'
 import loginService from '../services/login'
-import { UV_UDP_REUSEADDR } from 'constants';
 
 const loginReducer = (state = [], action) => {
 //   console.log('ACTION: ', action)
@@ -19,9 +18,7 @@ const loginReducer = (state = [], action) => {
 export const userLogin = ( credentials ) => {
     return async (dispatch) => {
         try {
-            console.log('start login')
             const user = await loginService.login( credentials )
-            console.log('user', user)
             blogService.setToken(user.token)
             window.localStorage.setItem('loggedBlogAppUser', JSON.stringify(user))
             dispatch({
@@ -29,7 +26,6 @@ export const userLogin = ( credentials ) => {
                 data: user
             })
         } catch (exception) {
-            console.log('logout')
             dispatch({
                 type: 'LOGOUT',
             })
@@ -54,7 +50,7 @@ export const userCheck = () => {
           blogService.setToken( user.token )
             dispatch({
                 type: 'LOGIN',
-                data: UV_UDP_REUSEADDR
+                data: user
             })
         } else {
             dispatch({

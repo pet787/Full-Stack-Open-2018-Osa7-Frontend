@@ -9,15 +9,13 @@ const blogReducer = (state = [], action) => {
     return action.data
   case 'VOTE_BLOG': {
     const id = action.data.id
-    const blogToChange = state.find(n => n.id === id)
-    const changedBlog = { ...blogToChange, vote: blogToChange.vote + 1 }
-    return state.map(blog => blog.id !== id ? blog : changedBlog )
+    const blogToChange = state.find(n => n._id === id)
+    const changedBlog = { ...blogToChange, likes: blogToChange.likes + 1 }
+    return state.map(blog => blog._id !== id ? blog : changedBlog )
   }
   case 'DELETE_BLOG': {
-    const id = action.data.id
-    const blogToChange = state.find(n => n.id === id)
-    const changedBlog = { ...blogToChange, vote: blogToChange.vote + 1 }
-    return state.map(blog => blog.id !== id ? blog : changedBlog )
+    const id = action.data
+    return state.filter( (blog) => { return blog._id !== id } )
   }
   default:
     return state
@@ -57,10 +55,10 @@ export const blogDelete = (id) => {
 export const blogVote = ( blog ) => {
   return async (dispatch) => {
     const updated = { ...blog, likes: blog.likes + 1 }
-    await blogService.update( blog.id, updated )
+    await blogService.update( blog._id, updated )
     dispatch({
       type: 'VOTE_BLOG',
-      data: { id: blog.id }
+      data: { id: blog._id }
     })
   }
 }
