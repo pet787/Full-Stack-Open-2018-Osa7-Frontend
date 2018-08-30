@@ -11,30 +11,30 @@ class UserForm extends React.Component {
   render() {
     const users = this.props.users
     if (users.length === 0 ) {
-        return null
-    } 
+      return null
+    }
     const { id } = this.props
-    const user = this.userById( id )  
-    const blogs = user.blogs  
+    const user = this.userById( id )
+    const blogs = user.blogs
     return (
-        <div >
-            <h2>{ user.name }</h2>
-            <h3>Added blogs</h3>
-            { blogs.map( blog => (
-              <p key = {blog._id}>{blog.title}</p>
-            ) )}
-        </div>  
-        )
+      <div >
+        <h2>{ user.name }</h2>
+        <h3>Added blogs</h3>
+        { blogs.map( blog => (
+          <p key = {blog._id}>{blog.title}</p>
+        ) )}
+      </div>
+    )
   }
 }
 
 const mapStateToProps = (state) => {
-    return {
-      users: state.users
-    }
+  return {
+    users: state.users
   }
+}
 
 export default connect(
-    mapStateToProps,
-    null
+  mapStateToProps,
+  null
 )(UserForm)

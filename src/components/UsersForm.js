@@ -5,53 +5,53 @@ import User from './User'
 
 class UsersForm extends React.Component {
 
-    logout = async (event) => {
-        event.preventDefault()
-        this.props.userLogout()
-        this.props.notify('logged out', 'info')
-        this.props.history.push('/')
-    }
+  logout = async (event) => {
+    event.preventDefault()
+    this.props.userLogout()
+    this.props.notify('logged out', 'info')
+    this.props.history.push('/')
+  }
 
     userClick = (user) => (event) => {
-        event.preventDefault()
-        console.log('user click', user)
+      event.preventDefault()
+      console.log('user click', user)
     }
 
     render() {
-        const userStyle = {
-            textAlign: 'left'
-          }
+      const userStyle = {
+        textAlign: 'left'
+      }
 
-        return (
-            <div>
-            <h2>users</h2>
-            <table style = {userStyle}>
+      return (
+        <div>
+          <h2>users</h2>
+          <table style = {userStyle}>
             <tbody>
               <tr>
                 <th>Username</th>
-                <th>Blogs added</th> 
+                <th>Blogs added</th>
               </tr>
-              {this.props.users.map(user => 
-                <User 
-                  key={user._id} 
-                  user={user} 
+              {this.props.users.map(user =>
+                <User
+                  key={user._id}
+                  user={user}
                 />
               )}
             </tbody>
-            </table>
-          </div>
-        )
+          </table>
+        </div>
+      )
     }
 }
 
 const mapStateToProps = (state) => {
-    return {
-      users: state.users
-    }
+  return {
+    users: state.users
   }
+}
 
 export default connect(
-    mapStateToProps,
-    null
-  )(UsersForm)
+  mapStateToProps,
+  null
+)(UsersForm)
 

@@ -16,48 +16,48 @@ const loginReducer = (state = [], action) => {
 }
 
 export const userLogin = ( credentials ) => {
-    return async (dispatch) => {
-        try {
-            const user = await loginService.login( credentials )
-            blogService.setToken(user.token)
-            window.localStorage.setItem('loggedBlogAppUser', JSON.stringify(user))
-            dispatch({
-                type: 'LOGIN',
-                data: user
-            })
-        } catch (exception) {
-            dispatch({
-                type: 'LOGOUT',
-            })
-        }
+  return async (dispatch) => {
+    try {
+      const user = await loginService.login( credentials )
+      blogService.setToken(user.token)
+      window.localStorage.setItem('loggedBlogAppUser', JSON.stringify(user))
+      dispatch({
+        type: 'LOGIN',
+        data: user
+      })
+    } catch (exception) {
+      dispatch({
+        type: 'LOGOUT',
+      })
     }
+  }
 }
 
 export const userLogout = () => {
-    return async (dispatch) => {
-        window.localStorage.removeItem('loggedBlogAppUser')
-        dispatch({
+  return async (dispatch) => {
+    window.localStorage.removeItem('loggedBlogAppUser')
+    dispatch({
+      type: 'LOGOUT'
+    })
+  }
+}
+
+export const userCheck = () => {
+  return async (dispatch) => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      blogService.setToken( user.token )
+      dispatch({
+        type: 'LOGIN',
+        data: user
+      })
+    } else {
+      dispatch({
         type: 'LOGOUT'
       })
     }
+  }
 }
-  
-export const userCheck = () => {
-      return async (dispatch) => {
-        const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser')
-        if (loggedUserJSON) {
-          const user = JSON.parse(loggedUserJSON)
-          blogService.setToken( user.token )
-            dispatch({
-                type: 'LOGIN',
-                data: user
-            })
-        } else {
-            dispatch({
-              type: 'LOGOUT'
-            })
-        }
-    }
-}
-  
+
 export default loginReducer

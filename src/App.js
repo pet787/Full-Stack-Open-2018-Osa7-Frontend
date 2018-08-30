@@ -21,53 +21,55 @@ class App extends React.Component {
     this.props.blogInitialization()
     this.props.userInitialization()
     this.props.userCheck()
-  } 
-  
-render() {
+  }
+
+  render() {
     return (
-      <Router>
-      <div>
-        <Notification />
-        <Route exact path="/" render={ ( { history } ) => 
-          <LoginForm history={history} /> 
-        } />
-        <Route exact path="/blogs" render={ ( { history } ) => {
-          return(  
-            <div>
-              <LoggedForm history={history} />
-              <CreateBlogForm history={history} />
-              <BlogsForm history={history} />
-            </div>
-          )
-        } } />
-        <Route exact path="/users" render={ ( { history } ) => { 
-          return(  
-            <div>
-              <LoggedForm history={history} />
-              <CreateBlogForm history={history} />
-              <UsersForm history={history} />
+      <div  className="container">
+        <Router>
+          <div>
+            <Notification />
+            <Route exact path="/" render={ ( { history } ) =>
+              <LoginForm history={history} />
+            } />
+            <Route exact path="/blogs" render={ ( { history } ) => {
+              return(
+                <div>
+                  <LoggedForm history={history} />
+                  <CreateBlogForm history={history} />
+                  <BlogsForm history={history} />
+                </div>
+              )
+            } } />
+            <Route exact path="/users" render={ ( { history } ) => {
+              return(
+                <div>
+                  <LoggedForm history={history} />
+                  <CreateBlogForm history={history} />
+                  <UsersForm history={history} />
+                </div>
+              )
+            } } />
+            <Route exact path="/users/:id" render={ ( { match, history } ) => {
+              return (
+                <div>
+                  <LoggedForm history={history} />
+                  <UserForm id = { match.params.id } />
+                </div>
+              )
+            } } />
+            <Route exact path="/blogs/:id" render={ ( { match, history } ) => {
+              return (
+                <div>
+                  <LoggedForm history={history} />
+                  <CreateBlogForm history={history} />
+                  <BlogShowForm id = { match.params.id }/>
+                </div>
+              )
+            } } />
           </div>
-          )
-        } } />
-        <Route exact path="/users/:id" render={ ( { match, history } ) => {
-          return (
-            <div>
-              <LoggedForm history={history} />
-              <UserForm id = { match.params.id } />
-            </div>
-          ) 
-        } } />
-        <Route exact path="/blogs/:id" render={ ( { match, history } ) => {
-          return (
-            <div>
-              <LoggedForm history={history} />
-              <CreateBlogForm history={history} />
-              <BlogShowForm id = { match.params.id }/>
-            </div>
-          ) 
-        } } />
-       </div>
-      </Router>
+        </Router>
+      </div>
     )
   }
 }

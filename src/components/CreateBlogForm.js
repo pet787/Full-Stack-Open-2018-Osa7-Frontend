@@ -7,62 +7,62 @@ import { notify } from '../reducers/notificationReducer'
 
 class CreateBlogForm extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            title: '',
-            author: '',
-            url: '',
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+      title: '',
+      author: '',
+      url: '',
     }
+  }
 
     handleInputChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value })
+      this.setState({ [event.target.name]: event.target.value })
     }
 
     addBlog = async (event) => {
-        event.preventDefault()
-    
-        const blog = {
-          title: this.state.title,
-          author: this.state.author,
-          url: this.state.url
-        }
-    
-        this.props.blogCreation( blog )    
-        this.props.notify(`blog '${blog.title}' by ${blog.author} added`, 'info')
-    
-        this.setState({ 
-          title: '', 
-          url: '', 
-          author: '',
-        })
+      event.preventDefault()
+
+      const blog = {
+        title: this.state.title,
+        author: this.state.author,
+        url: this.state.url
+      }
+
+      this.props.blogCreation( blog )
+      this.props.notify(`blog '${blog.title}' by ${blog.author} added`, 'info')
+
+      this.setState({
+        title: '',
+        url: '',
+        author: '',
+      })
     }
 
     render() {
 
-        return (
-            <Togglable buttonLabel='Create blog'>
-            <BlogForm 
-                handleChange={this.handleInputChange}
-                title={this.state.title}
-                author={this.state.author}
-                url={this.state.url}
-                handleSubmit={this.addBlog}
-            />
-            </Togglable>
-        )
+      return (
+        <Togglable buttonLabel='Create blog'>
+          <BlogForm
+            handleChange={this.handleInputChange}
+            title={this.state.title}
+            author={this.state.author}
+            url={this.state.url}
+            handleSubmit={this.addBlog}
+          />
+        </Togglable>
+      )
     }
 }
 
 const mapStateToProps = (state) => {
-    return {
-        state: state
-    }
+  return {
+    state: state
+  }
 }
 
 export default connect(
-    mapStateToProps,
-    { blogCreation, notify }
+  mapStateToProps,
+  { blogCreation, notify }
 )(CreateBlogForm)
 

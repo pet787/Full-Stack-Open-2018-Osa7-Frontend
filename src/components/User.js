@@ -7,10 +7,10 @@ class User extends React.Component {
     const { user } = this.props
 
     return (
-        <tr >
-            <th><Link to={`/users/${user._id}`}>{user.name}</Link></th>
-            <th>{user.blogs.length }</th>
-        </tr>
+      <tr >
+        <th><Link to={`/users/${user._id}`}>{user.name}</Link></th>
+        <th>{user.blogs.length }</th>
+      </tr>
     )
   }
 }

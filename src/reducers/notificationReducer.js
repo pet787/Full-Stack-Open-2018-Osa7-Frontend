@@ -1,17 +1,17 @@
-const initialState = { 
+const initialState = {
   message: 'Application started',
   type: 'info'
 }
 
 const notificationReducer = (store = initialState, action) => {
   switch (action.type) {
-    case 'SET_NOTIFICATION': 
-      return { 
-        message: action.note,
-        type: action.notificationType
-      }
-    case 'CLEAR_NOTIFICATION': return null
-    default: return store
+  case 'SET_NOTIFICATION':
+    return {
+      message: action.note,
+      type: action.notificationType
+    }
+  case 'CLEAR_NOTIFICATION': return null
+  default: return store
   }
 }
 

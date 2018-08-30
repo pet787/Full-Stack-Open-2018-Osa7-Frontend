@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 
 
 class Blog extends React.Component {
@@ -35,14 +36,14 @@ class Blog extends React.Component {
             <a href={blog.url}>{blog.url}</a>
           </div>
           <div>
-            {blog.likes} likes <button onClick={like}>like</button>
+            {blog.likes} likes <Button bsStyle="success" onClick={like}>Like</Button>
           </div>
           <div>
             added by {adder}
           </div>
           {deletable && <div><button onClick={remove}>delete</button></div>}
         </div>
-      </div>  
+      </div>
     )
   }
 }
