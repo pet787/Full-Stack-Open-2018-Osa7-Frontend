@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 class User extends React.Component {
 
   render() {
-    const { user, onClick } = this.props
+    const { user } = this.props
 
     return (
-        <tr onClick={ onClick } >
+        <tr >
             <th><Link to={`/users/${user._id}`}>{user.name}</Link></th>
             <th>{user.blogs.length }</th>
         </tr>

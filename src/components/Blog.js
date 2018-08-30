@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 
 class Blog extends React.Component {
   constructor() {
@@ -27,12 +29,7 @@ class Blog extends React.Component {
 
     return (
       <div style={blogStyle}>
-        <div 
-          onClick={() => this.setState({ visible: !this.state.visible })} 
-          className='name'
-        >
-          {blog.title} {blog.author}
-        </div>
+        <Link to={`/blogs/${blog._id}`}>{blog.title} by {blog.author}</Link>
         <div style={contentStyle} className='content'>
           <div>
             <a href={blog.url}>{blog.url}</a>

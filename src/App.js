@@ -3,12 +3,13 @@ import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import BlogsForm from './components/BlogsForm'
+import BlogShowForm from './components/BlogShowForm'
+import CreateBlogForm from './components/CreateBlogForm'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import LoggedForm from './components/LoggedForm'
 import UsersForm from './components/UsersForm'
 import UserForm from './components/UserForm'
-import CreateBlogForm from './components/CreateBlogForm'
 
 import { blogInitialization } from './reducers/blogReducer'
 import { userInitialization } from './reducers/userReducer'
@@ -30,7 +31,7 @@ render() {
         <Route exact path="/" render={ ( { history } ) => 
           <LoginForm history={history} /> 
         } />
-        <Route path="/blogs" render={ ( { history } ) => {
+        <Route exact path="/blogs" render={ ( { history } ) => {
           return(  
             <div>
               <LoggedForm history={history} />
@@ -45,7 +46,6 @@ render() {
               <LoggedForm history={history} />
               <CreateBlogForm history={history} />
               <UsersForm history={history} />
-              <UserForm id = '5b71a62ad9b41c0310002cbe' />
           </div>
           )
         } } />
@@ -53,7 +53,16 @@ render() {
           return (
             <div>
               <LoggedForm history={history} />
-              <UserForm id = { match.params.id } xxx = {this.props.users}/>
+              <UserForm id = { match.params.id } />
+            </div>
+          ) 
+        } } />
+        <Route exact path="/blogs/:id" render={ ( { match, history } ) => {
+          return (
+            <div>
+              <LoggedForm history={history} />
+              <CreateBlogForm history={history} />
+              <BlogShowForm id = { match.params.id }/>
             </div>
           ) 
         } } />

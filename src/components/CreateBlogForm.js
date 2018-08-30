@@ -42,7 +42,7 @@ class CreateBlogForm extends React.Component {
     render() {
 
         return (
-            <Togglable buttonLabel='uusi blogi'>
+            <Togglable buttonLabel='Create blog'>
             <BlogForm 
                 handleChange={this.handleInputChange}
                 title={this.state.title}
