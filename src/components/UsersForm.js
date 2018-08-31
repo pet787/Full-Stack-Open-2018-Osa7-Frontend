@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import User from './User'
-
+import { Table } from 'react-bootstrap'
 
 class UsersForm extends React.Component {
 
@@ -18,14 +18,11 @@ class UsersForm extends React.Component {
     }
 
     render() {
-      const userStyle = {
-        textAlign: 'left'
-      }
 
       return (
         <div>
-          <h2>users</h2>
-          <table style = {userStyle}>
+          <h2>Users</h2>
+          <Table striped>
             <tbody>
               <tr>
                 <th>Username</th>
@@ -38,7 +35,7 @@ class UsersForm extends React.Component {
                 />
               )}
             </tbody>
-          </table>
+          </Table>
         </div>
       )
     }

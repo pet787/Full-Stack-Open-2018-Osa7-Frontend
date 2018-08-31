@@ -63,7 +63,7 @@ class App extends React.Component {
                 <div>
                   <LoggedForm history={history} />
                   <CreateBlogForm history={history} />
-                  <BlogShowForm id = { match.params.id }/>
+                  <BlogShowForm id = { match.params.id } history={history}/>
                 </div>
               )
             } } />

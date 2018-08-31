@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { blogComment, blogVote } from '../reducers/blogReducer'
+import { blogComment, blogVote, blogDelete } from '../reducers/blogReducer'
 import { notify } from '../reducers/notificationReducer'
 import { Button } from 'react-bootstrap'
 
@@ -50,15 +50,21 @@ remove = ( id ) => async () => {
 
   this.props.blogDelete( id )
   this.props.notify(`blog '${deleted.title}' by ${deleted.author} removed`, 'info')
+  this.props.history.push('/blogs')
 }
 
 render() {
   const blogs = this.props.blogs
+
+
   if (blogs.length === 0 ) {
     return null
   }
   const { id } = this.props
   const blog = this.blogById( id )
+  const user = this.props.login
+  const deletable = blog.user === undefined || blog.user.username === user.username
+  const deleteVisibleStyle = { display: deletable ? '' : 'none' }
   const adder = blog.user ? blog.user.name : 'anonymous'
   const comments = blog.comments
   return (
@@ -68,10 +74,13 @@ render() {
         <a href={blog.url}>{blog.url}</a>
       </div>
       <div>
-        {blog.likes} likes <Button bsStyle="success" onClick={this.like(blog._id)}>Like</Button>
+        {blog.likes} likes <Button bsStyle="success" onClick={this.like(blog._id)}>Like +1</Button>
       </div>
       <div>
         added by {adder}
+      </div>
+      <div style={deleteVisibleStyle}>
+        <Button bsStyle="danger" onClick={this.remove(blog._id)}>Delete</Button>
       </div>
       <h3>Comments</h3>
       <input
@@ -89,11 +98,12 @@ render() {
 
 const mapStateToProps = (state) => {
   return {
-    blogs: state.blogs
+    blogs: state.blogs,
+    login: state.login
   }
 }
 
 export default connect(
   mapStateToProps,
-  { blogComment, blogVote, notify }
+  { blogComment, blogVote, blogDelete, notify }
 )(BlogShowForm)

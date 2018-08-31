@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Table } from 'react-bootstrap'
 
 class UserForm extends React.Component {
 
@@ -20,9 +21,11 @@ class UserForm extends React.Component {
       <div >
         <h2>{ user.name }</h2>
         <h3>Added blogs</h3>
-        { blogs.map( blog => (
-          <p key = {blog._id}>{blog.title}</p>
-        ) )}
+        <Table striped><tbody>
+          { blogs.map( blog => (
+            <tr key = {blog._id}><td>{blog.title}</td></tr>
+          ) )}
+        </tbody></Table>
       </div>
     )
   }

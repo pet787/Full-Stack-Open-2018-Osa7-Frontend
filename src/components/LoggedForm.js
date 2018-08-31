@@ -60,6 +60,7 @@ class LoggedForm extends React.Component {
 
     const user = this.props.login
 
+    if (!user) return null
 
     return (
       <div>

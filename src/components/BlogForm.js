@@ -5,11 +5,11 @@ import { Button } from 'react-bootstrap'
 const BlogForm = ({ title, author, url, handleChange, handleSubmit }) => {
   return (
     <div>
-      <h2>Luo uusi blogi</h2>
+      <h2>Create new blog</h2>
 
       <form onSubmit={handleSubmit}>
         <div>
-          title
+          Title:
           <input
             value={title}
             name='title'
@@ -17,7 +17,7 @@ const BlogForm = ({ title, author, url, handleChange, handleSubmit }) => {
           />
         </div>
         <div>
-          author
+          Author:
           <input
             value={author}
             name='author'
@@ -25,14 +25,14 @@ const BlogForm = ({ title, author, url, handleChange, handleSubmit }) => {
           />
         </div>
         <div>
-          url
+          URL:
           <input
             value={url}
             name='url'
             onChange={handleChange}
           />
         </div>
-        <Button bsStyle="success" onClick={handleSubmit}>Luo</Button>
+        <Button bsStyle="success" onClick={handleSubmit}>Create</Button>
       </form>
     </div>
   )

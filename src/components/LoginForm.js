@@ -17,39 +17,43 @@ class LoginForm extends React.Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
+  loginSuccess = () => () => {
+    this.props.notify('welcome back!', 'info')
+    this.props.history.push('/blogs')
+  }
+
+  loginFailure = () => () => {
+    this.props.notify('käyttäjätunnus tai salasana virheellinen', 'error')
+  }
+
   login = async (event) => {
     event.preventDefault()
-    this.props.userLogin({ username: this.state.username, password: this.state.password })
-    const user = this.props.login
-    if (user === null || user.length === 0) {
-      this.props.notify('käyttäjätunnus tai salasana virheellinen', 'error')
-    } else {
-      this.props.notify('welcome back!', 'info')
-      this.props.history.push('/blogs')
-    }
+    const credentials ={ username: this.state.username, password: this.state.password }
+    console.log( credentials )
+    this.props.userLogin( credentials, this.loginSuccess(), this.loginFailure() )
   }
 
   render() {
     return (
       <div>
-        <h2>Kirjaudu sovellukseen</h2>
+        <h2>Login to app</h2>
         <form onSubmit={this.login}>
           <FormGroup>
-            <ControlLabel>Käyttäjätunnus:</ControlLabel>
+            <ControlLabel>Username:</ControlLabel>
             <FormControl
               type="text"
               name="username"
               value={this.state.username}
               onChange={this.handleLoginChange}
             />
-            <ControlLabel>Salasana:</ControlLabel>
+            <ControlLabel>Password:</ControlLabel>
             <FormControl
               type="password"
               name="password"
               value={this.state.password}
               onChange={this.handleLoginChange}
             />
-            <Button bsStyle="success" type="submit">kirjaudu</Button>
+            <Button bsStyle="success" type="submit">Login</Button>
           </FormGroup>
         </form>
       </div>

@@ -15,17 +15,19 @@ const loginReducer = (state = [], action) => {
   }
 }
 
-export const userLogin = ( credentials ) => {
+export const userLogin = ( credentials, success, failure ) => {
   return async (dispatch) => {
     try {
       const user = await loginService.login( credentials )
       blogService.setToken(user.token)
       window.localStorage.setItem('loggedBlogAppUser', JSON.stringify(user))
+      success()
       dispatch({
         type: 'LOGIN',
         data: user
       })
     } catch (exception) {
+      failure()
       dispatch({
         type: 'LOGOUT',
       })
@@ -61,3 +63,4 @@ export const userCheck = () => {
 }
 
 export default loginReducer
+
