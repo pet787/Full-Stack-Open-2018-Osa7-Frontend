@@ -16,17 +16,22 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "webpack --mode=development",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:3003",
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.0",
+    "babel-preset-react": "^6.24.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^5.4.0",
-    "supertest": "^3.1.0",
     "eslint-plugin-jest": "^21.7.0",
-    "eslint-plugin-react": "^7.6.1"
+    "eslint-plugin-react": "^7.6.1",
+    "supertest": "^3.1.0",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
   }
 }
